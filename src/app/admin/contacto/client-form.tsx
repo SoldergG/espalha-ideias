@@ -39,9 +39,15 @@ export function ContactoForm({ contacto }: { contacto: Contacto }) {
           <input name="email" type="email" defaultValue={contacto.email} className={inputClass} />
         </div>
       </div>
-      <div>
-        <label className="block text-sm font-medium text-ink">Link do Facebook</label>
-        <input name="facebook_url" defaultValue={contacto.facebookUrl} className={inputClass} />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div>
+          <label className="block text-sm font-medium text-ink">Link do Facebook</label>
+          <input name="facebook_url" defaultValue={contacto.facebookUrl} className={inputClass} />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-ink">Link do LinkedIn</label>
+          <input name="linkedin_url" defaultValue={contacto.linkedinUrl} className={inputClass} />
+        </div>
       </div>
       <div>
         <label className="block text-sm font-medium text-ink">
@@ -55,6 +61,15 @@ export function ContactoForm({ contacto }: { contacto: Contacto }) {
           name="transporte"
           defaultValue={contacto.transporte.join("\n")}
           rows={4}
+          className={inputClass}
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-ink">Pessoas de contacto (uma por linha)</label>
+        <textarea
+          name="pessoas_contacto"
+          defaultValue={contacto.pessoasContacto.join("\n")}
+          rows={2}
           className={inputClass}
         />
       </div>

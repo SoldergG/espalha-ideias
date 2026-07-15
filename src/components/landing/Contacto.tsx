@@ -1,4 +1,11 @@
-import { Envelope, FacebookLogo, MapPin, Phone } from "@phosphor-icons/react/dist/ssr";
+import {
+  Envelope,
+  FacebookLogo,
+  LinkedinLogo,
+  MapPin,
+  Phone,
+  User,
+} from "@phosphor-icons/react/dist/ssr";
 import type { Contacto as ContactoContent } from "@/lib/content/types";
 import { RevealOnScroll } from "./RevealOnScroll";
 
@@ -46,6 +53,25 @@ export function Contacto({ content }: { content: ContactoContent }) {
                 Facebook
               </a>
             </div>
+            <div className="flex items-center gap-3">
+              <LinkedinLogo size={20} weight="light" className="shrink-0 text-olive" />
+              <a
+                href={content.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-ink"
+              >
+                LinkedIn
+              </a>
+            </div>
+            {content.pessoasContacto.length > 0 && (
+              <div className="flex items-start gap-3">
+                <User size={20} weight="light" className="mt-0.5 shrink-0 text-olive" />
+                <p className="text-sm leading-relaxed text-ink">
+                  {content.pessoasContacto.join(" · ")}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="mt-8 border-t border-border pt-6">

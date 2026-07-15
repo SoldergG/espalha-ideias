@@ -57,8 +57,10 @@ export type Contacto = {
   telefone: string;
   email: string;
   facebookUrl: string;
+  linkedinUrl: string;
   googleMapsEmbedUrl: string;
   transporte: string[];
+  pessoasContacto: string[];
 };
 
 export type SiteContent = {

@@ -132,8 +132,10 @@ export async function getContacto(): Promise<Contacto> {
     telefone: row.telefone,
     email: row.email,
     facebookUrl: row.facebook_url,
+    linkedinUrl: row.linkedin_url,
     googleMapsEmbedUrl: row.google_maps_url,
     transporte: row.transporte ?? [],
+    pessoasContacto: row.pessoas_contacto ?? [],
   };
 }
 

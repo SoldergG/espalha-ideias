@@ -17,6 +17,11 @@ export async function updateContactoAction(
       .map((linha) => linha.trim())
       .filter(Boolean);
 
+    const pessoasContacto = String(formData.get("pessoas_contacto") ?? "")
+      .split("\n")
+      .map((linha) => linha.trim())
+      .filter(Boolean);
+
     const { error } = await supabaseAdmin
       .from("contacto")
       .update({
@@ -26,8 +31,10 @@ export async function updateContactoAction(
         telefone: String(formData.get("telefone") ?? ""),
         email: String(formData.get("email") ?? ""),
         facebook_url: String(formData.get("facebook_url") ?? ""),
+        linkedin_url: String(formData.get("linkedin_url") ?? ""),
         google_maps_url: String(formData.get("google_maps_url") ?? ""),
         transporte,
+        pessoas_contacto: pessoasContacto,
       })
       .eq("id", 1);
     if (error) throw error;

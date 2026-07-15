@@ -27,7 +27,10 @@ export default async function Home() {
         />
         <Contacto content={siteContent.contacto} />
       </main>
-      <Footer facebookUrl={siteContent.contacto.facebookUrl} />
+      <Footer
+        facebookUrl={siteContent.contacto.facebookUrl}
+        linkedinUrl={siteContent.contacto.linkedinUrl}
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { FacebookLogo } from "@phosphor-icons/react/dist/ssr";
+import { FacebookLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import { Wordmark } from "./LogoMark";
 
 const FOOTER_LINKS = [
@@ -13,7 +13,13 @@ const LEGAL_LINKS = [
   { label: "Código de Conduta Anticorrupção", href: "/documents/codigo-conduta-corrupcao.pdf" },
 ];
 
-export function Footer({ facebookUrl }: { facebookUrl: string }) {
+export function Footer({
+  facebookUrl,
+  linkedinUrl,
+}: {
+  facebookUrl: string;
+  linkedinUrl: string;
+}) {
   return (
     <footer className="border-t border-border bg-cream-soft">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
@@ -31,15 +37,26 @@ export function Footer({ facebookUrl }: { facebookUrl: string }) {
           ))}
         </nav>
 
-        <a
-          href={facebookUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Espalha Ideias no Facebook"
-          className="text-ink-muted hover:text-ink"
-        >
-          <FacebookLogo size={20} weight="light" />
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href={facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Espalha Ideias no Facebook"
+            className="text-ink-muted hover:text-ink"
+          >
+            <FacebookLogo size={20} weight="light" />
+          </a>
+          <a
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Espalha Ideias no LinkedIn"
+            className="text-ink-muted hover:text-ink"
+          >
+            <LinkedinLogo size={20} weight="light" />
+          </a>
+        </div>
       </div>
       <div className="border-t border-border px-4 py-5 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
