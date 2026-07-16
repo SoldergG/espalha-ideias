@@ -30,6 +30,7 @@ export default async function Home() {
       <Footer
         facebookUrl={siteContent.contacto.facebookUrl}
         linkedinUrl={siteContent.contacto.linkedinUrl}
+        pessoasContacto={siteContent.contacto.pessoasContacto}
       />
     </div>
   );

@@ -16,9 +16,11 @@ const LEGAL_LINKS = [
 export function Footer({
   facebookUrl,
   linkedinUrl,
+  pessoasContacto,
 }: {
   facebookUrl: string;
   linkedinUrl: string;
+  pessoasContacto: string[];
 }) {
   return (
     <footer className="border-t border-border bg-cream-soft">
@@ -62,6 +64,7 @@ export function Footer({
         <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-ink-muted">
             © {new Date().getFullYear()} Espalha Ideias. Todos os direitos reservados.
+            {pessoasContacto.length > 0 && <> · {pessoasContacto.join(" · ")}</>}
           </p>
           <nav className="flex flex-wrap gap-x-5 gap-y-1.5">
             {LEGAL_LINKS.map((link) => (
