@@ -3,7 +3,10 @@ import type {
   Certificacao,
   Contacto,
   Destaque,
+  EncarregadosEducacao,
   Hero,
+  Noticia,
+  NoticiaResumo,
   Servico,
   ServicoSlug,
   SiteContent,
@@ -136,6 +139,70 @@ export async function getContacto(): Promise<Contacto> {
     googleMapsEmbedUrl: row.google_maps_url,
     transporte: row.transporte ?? [],
     pessoasContacto: row.pessoas_contacto ?? [],
+  };
+}
+
+function formatDataNoticia(isoDate: string): string {
+  const formatted = new Intl.DateTimeFormat("pt-PT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(isoDate));
+  return formatted;
+}
+
+export async function getNoticias(): Promise<NoticiaResumo[]> {
+  const { data, error } = await supabasePublic
+    .from("noticias")
+    .select("titulo, slug, resumo, data_noticia, image_path, image_alt, categoria")
+    .eq("publicado", true)
+    .order("ordem", { ascending: true });
+  if (error) throw error;
+  return (data ?? []).map((row) => ({
+    titulo: row.titulo,
+    slug: row.slug,
+    resumo: row.resumo,
+    dataNoticia: formatDataNoticia(row.data_noticia),
+    imageSrc: row.image_path,
+    imageAlt: row.image_alt,
+    categoria: row.categoria,
+  }));
+}
+
+export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
+  const { data, error } = await supabasePublic
+    .from("noticias")
+    .select("*")
+    .eq("slug", slug)
+    .eq("publicado", true)
+    .single();
+  if (error) return null;
+  return {
+    titulo: data.titulo,
+    slug: data.slug,
+    resumo: data.resumo,
+    corpo: data.corpo,
+    anexoTexto: data.anexo_texto,
+    dataNoticia: formatDataNoticia(data.data_noticia),
+    imageSrc: data.image_path,
+    imageAlt: data.image_alt,
+    categoria: data.categoria,
+  };
+}
+
+export async function getEncarregadosEducacao(): Promise<EncarregadosEducacao> {
+  const { data, error } = await supabasePublic
+    .from("encarregados_educacao")
+    .select("*")
+    .eq("id", 1)
+    .single();
+  if (error) throw error;
+  const row = assertRow(data, "encarregados_educacao");
+  return {
+    texto: row.texto,
+    portalUrl: row.portal_url,
+    fichaInscricaoUrl: row.ficha_inscricao_url,
   };
 }
 

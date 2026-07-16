@@ -4,7 +4,6 @@ import {
   LinkedinLogo,
   MapPin,
   Phone,
-  User,
 } from "@phosphor-icons/react/dist/ssr";
 import type { Contacto as ContactoContent } from "@/lib/content/types";
 import { RevealOnScroll } from "./RevealOnScroll";
@@ -64,14 +63,6 @@ export function Contacto({ content }: { content: ContactoContent }) {
                 LinkedIn
               </a>
             </div>
-            {content.pessoasContacto.length > 0 && (
-              <div className="flex items-start gap-3">
-                <User size={20} weight="light" className="mt-0.5 shrink-0 text-olive" />
-                <p className="text-sm leading-relaxed text-ink">
-                  {content.pessoasContacto.join(" · ")}
-                </p>
-              </div>
-            )}
           </div>
 
           <div className="mt-8 border-t border-border pt-6">

@@ -2,10 +2,14 @@ import { FacebookLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import { Wordmark } from "./LogoMark";
 
 const FOOTER_LINKS = [
-  { label: "Sobre", href: "#sobre" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Links", href: "#links" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Serviços", href: "/#servicos" },
+  { label: "Links", href: "/#links" },
+  { label: "Contacto", href: "/#contacto" },
+  { label: "Notícias", href: "/noticias" },
+  { label: "Imprensa", href: "/imprensa" },
+  { label: "Agenda", href: "/agenda" },
+  { label: "Encarregados de Educação", href: "/encarregados-educacao" },
 ];
 
 export function Footer({

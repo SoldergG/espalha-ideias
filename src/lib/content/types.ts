@@ -63,6 +63,29 @@ export type Contacto = {
   pessoasContacto: string[];
 };
 
+export type NoticiaCategoria = "institucional" | "recrutamento";
+
+export type NoticiaResumo = {
+  slug: string;
+  titulo: string;
+  resumo: string;
+  dataNoticia: string;
+  imageSrc: string | null;
+  imageAlt: string | null;
+  categoria: NoticiaCategoria;
+};
+
+export type Noticia = NoticiaResumo & {
+  corpo: string;
+  anexoTexto: string | null;
+};
+
+export type EncarregadosEducacao = {
+  texto: string;
+  portalUrl: string;
+  fichaInscricaoUrl: string;
+};
+
 export type SiteContent = {
   hero: Hero;
   sobre: Sobre;
