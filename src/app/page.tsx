@@ -5,6 +5,7 @@ import { Sobre } from "@/components/landing/Sobre";
 import { Servicos } from "@/components/landing/Servicos";
 import { Destaques } from "@/components/landing/Destaques";
 import { Certificacoes } from "@/components/landing/Certificacoes";
+import { Links } from "@/components/landing/Links";
 import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";
 
@@ -25,6 +26,7 @@ export default async function Home() {
           intro={siteContent.certificacoesIntro}
           certificacoes={siteContent.certificacoes}
         />
+        <Links />
         <Contacto content={siteContent.contacto} />
       </main>
       <Footer

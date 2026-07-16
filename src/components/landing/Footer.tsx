@@ -4,13 +4,8 @@ import { Wordmark } from "./LogoMark";
 const FOOTER_LINKS = [
   { label: "Sobre", href: "#sobre" },
   { label: "Serviços", href: "#servicos" },
+  { label: "Links", href: "#links" },
   { label: "Contacto", href: "#contacto" },
-];
-
-const LEGAL_LINKS = [
-  { label: "Política de Privacidade", href: "/documents/politica-de-privacidade.pdf" },
-  { label: "Código de Boa Conduta", href: "/documents/codigo-boa-conduta-assedio.pdf" },
-  { label: "Código de Conduta Anticorrupção", href: "/documents/codigo-conduta-corrupcao.pdf" },
 ];
 
 export function Footer({
@@ -61,24 +56,11 @@ export function Footer({
         </div>
       </div>
       <div className="border-t border-border px-4 py-5 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto max-w-6xl">
           <p className="text-xs text-ink-muted">
             © {new Date().getFullYear()} Espalha Ideias. Todos os direitos reservados.
             {pessoasContacto.length > 0 && <> · {pessoasContacto.join(" · ")}</>}
           </p>
-          <nav className="flex flex-wrap gap-x-5 gap-y-1.5">
-            {LEGAL_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-ink-muted hover:text-ink"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
         </div>
       </div>
     </footer>
