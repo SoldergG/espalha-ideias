@@ -1,6 +1,26 @@
 import type { Hero as HeroContent } from "@/lib/content/types";
 import { RevealOnScroll } from "./RevealOnScroll";
 
+/**
+ * Renders the headline from the database, italicising any segment the editor
+ * wrapped in asterisks: "Equipas que dão vida a *espaços culturais*".
+ */
+function Headline({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\*[^*]+\*)/).map((part, index) =>
+        part.startsWith("*") && part.endsWith("*") && part.length > 2 ? (
+          <em key={index} className="italic">
+            {part.slice(1, -1)}
+          </em>
+        ) : (
+          part
+        )
+      )}
+    </>
+  );
+}
+
 export function Hero({ content }: { content: HeroContent }) {
   return (
     <section id="top" className="pt-14 pb-20 sm:pt-20 sm:pb-28">
@@ -8,7 +28,7 @@ export function Hero({ content }: { content: HeroContent }) {
         <RevealOnScroll>
           <p className="text-[13px] uppercase tracking-[0.16em] text-olive">{content.kicker}</p>
           <h1 className="mt-5 pb-1 font-display text-[2.6rem] leading-[1.15] text-ink sm:text-5xl lg:text-[3.4rem]">
-            Atividades que dão sentido ao <em className="italic">tempo livre</em>
+            <Headline text={content.headline} />
           </h1>
           <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-ink-muted">
             {content.subheadline}

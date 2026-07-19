@@ -75,7 +75,7 @@ export function Servicos({ servicos }: { servicos: Servico[] }) {
             href="/artes-cultura"
             className="mt-10 inline-flex items-center gap-2 border border-border bg-paper px-6 py-4 text-[13px] uppercase tracking-[0.1em] text-ink transition-colors hover:border-olive hover:text-olive"
           >
-            Também trabalhamos em Artes &amp; Cultura
+            Serviços - Artes &amp; Cultura
             <ArrowRight size={14} weight="light" />
           </Link>
         </RevealOnScroll>
