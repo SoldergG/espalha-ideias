@@ -11,7 +11,9 @@ const initialState: SectionFormState = {};
 const TABS: { slug: ServicoSlug; label: string }[] = [
   { slug: "aec", label: "AEC" },
   { slug: "caf", label: "CAF" },
+  { slug: "aaaf", label: "AAAF" },
   { slug: "ferias", label: "Férias" },
+  { slug: "assistentes", label: "Assistentes Operacionais" },
 ];
 
 const inputClass =

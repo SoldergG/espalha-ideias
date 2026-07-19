@@ -21,7 +21,7 @@ export type Sobre = {
   imageAlt: string;
 };
 
-export type ServicoSlug = "aec" | "caf" | "ferias";
+export type ServicoSlug = "aec" | "caf" | "aaaf" | "ferias" | "assistentes";
 
 export type Servico = {
   slug: ServicoSlug;

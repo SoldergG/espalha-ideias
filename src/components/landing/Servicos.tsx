@@ -81,7 +81,7 @@ export function Servicos({ servicos }: { servicos: Servico[] }) {
         <RevealOnScroll className="max-w-xl">
           <h2 className="font-display text-3xl text-ink sm:text-4xl">Os nossos serviços</h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted">
-            Três áreas de atuação, uma só equipa.
+            Cinco áreas de atuação, uma só equipa.
           </p>
         </RevealOnScroll>
 
