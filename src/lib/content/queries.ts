@@ -8,6 +8,7 @@ import type {
   Noticia,
   NoticiaResumo,
   Servico,
+  ServicoArea,
   ServicoSlug,
   SiteContent,
   Sobre,
@@ -53,14 +54,14 @@ export async function getSobre(): Promise<Sobre> {
   };
 }
 
-export async function getServicos(): Promise<Servico[]> {
-  const { data, error } = await supabasePublic
-    .from("servicos")
-    .select("*")
-    .order("ordem", { ascending: true });
+export async function getServicos(area?: ServicoArea): Promise<Servico[]> {
+  let query = supabasePublic.from("servicos").select("*");
+  if (area) query = query.eq("area", area);
+  const { data, error } = await query.order("ordem", { ascending: true });
   if (error) throw error;
   return (data ?? []).map((row) => ({
     slug: row.slug as ServicoSlug,
+    area: row.area as ServicoArea,
     titulo: row.titulo,
     resumo: row.resumo,
     pontos: row.pontos ?? [],
@@ -211,7 +212,7 @@ export async function getSiteContent(): Promise<SiteContent> {
     await Promise.all([
       getHero(),
       getSobre(),
-      getServicos(),
+      getServicos("educacao"),
       getDestaquesPublicados(),
       getCertificacoes(),
       getContacto(),

@@ -1,15 +1,9 @@
 import Image from "next/image";
-import { FileText } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
+import { ArrowRight, FileText } from "@phosphor-icons/react/dist/ssr";
 import type { Servico } from "@/lib/content/types";
 import { RevealOnScroll } from "./RevealOnScroll";
-
-function PontoTag({ label }: { label: string }) {
-  return (
-    <span className="border border-border px-3 py-1 text-xs uppercase tracking-[0.06em] text-ink-muted">
-      {label}
-    </span>
-  );
-}
+import { PontoTag, ServicoCard } from "./ServicoCard";
 
 function FeaturedServiceCard({ servico }: { servico: Servico }) {
   return (
@@ -47,31 +41,6 @@ function FeaturedServiceCard({ servico }: { servico: Servico }) {
   );
 }
 
-function ServiceCard({ servico }: { servico: Servico }) {
-  return (
-    <div className="flex flex-col overflow-hidden border border-border bg-paper">
-      <div className="relative aspect-[16/10]">
-        <Image
-          src={servico.imageSrc}
-          alt={servico.imageAlt}
-          fill
-          sizes="(min-width: 1024px) 380px, 90vw"
-          className="object-cover"
-        />
-      </div>
-      <div className="flex flex-1 flex-col p-7">
-        <h3 className="font-display text-xl text-ink">{servico.titulo}</h3>
-        <p className="mt-2.5 text-sm leading-relaxed text-ink-muted">{servico.resumo}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {servico.pontos.map((ponto) => (
-            <PontoTag key={ponto} label={ponto} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function Servicos({ servicos }: { servicos: Servico[] }) {
   const [featured, ...rest] = servicos;
 
@@ -79,7 +48,8 @@ export function Servicos({ servicos }: { servicos: Servico[] }) {
     <section id="servicos" className="bg-cream-soft py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <RevealOnScroll className="max-w-xl">
-          <h2 className="font-display text-3xl text-ink sm:text-4xl">Os nossos serviços</h2>
+          <p className="text-xs uppercase tracking-[0.14em] text-olive">Educação</p>
+          <h2 className="mt-2 font-display text-3xl text-ink sm:text-4xl">Os nossos serviços</h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted">
             Cinco áreas de atuação, uma só equipa.
           </p>
@@ -94,11 +64,21 @@ export function Servicos({ servicos }: { servicos: Servico[] }) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {rest.map((servico, index) => (
               <RevealOnScroll key={servico.slug} delay={index * 0.08}>
-                <ServiceCard servico={servico} />
+                <ServicoCard servico={servico} />
               </RevealOnScroll>
             ))}
           </div>
         </div>
+
+        <RevealOnScroll>
+          <Link
+            href="/artes-cultura"
+            className="mt-10 inline-flex items-center gap-2 border border-border bg-paper px-6 py-4 text-[13px] uppercase tracking-[0.1em] text-ink transition-colors hover:border-olive hover:text-olive"
+          >
+            Também trabalhamos em Artes &amp; Cultura
+            <ArrowRight size={14} weight="light" />
+          </Link>
+        </RevealOnScroll>
       </div>
     </section>
   );

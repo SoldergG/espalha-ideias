@@ -2,19 +2,18 @@
 
 import { useActionState, useState } from "react";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
-import type { Servico, ServicoSlug } from "@/lib/content/types";
+import type { Servico, ServicoArea, ServicoSlug } from "@/lib/content/types";
 import { updateServicoAction } from "./actions";
 import type { SectionFormState } from "../hero-sobre/actions";
 
 const initialState: SectionFormState = {};
 
-const TABS: { slug: ServicoSlug; label: string }[] = [
-  { slug: "aec", label: "AEC" },
-  { slug: "caf", label: "CAF" },
-  { slug: "aaaf", label: "AAAF" },
-  { slug: "ferias", label: "Férias" },
-  { slug: "assistentes", label: "Assistentes Operacionais" },
-];
+const AREA_LABELS: Record<ServicoArea, string> = {
+  educacao: "Educação",
+  "artes-cultura": "Artes & Cultura",
+};
+
+const AREA_ORDER: ServicoArea[] = ["educacao", "artes-cultura"];
 
 const inputClass =
   "mt-1.5 w-full border border-border bg-cream px-3 py-2 text-sm text-ink outline-none transition focus:border-orange focus:ring-2 focus:ring-orange-soft";
@@ -62,25 +61,39 @@ function ServicoFormFields({ servico }: { servico: Servico }) {
 }
 
 export function ServicosTabs({ servicos }: { servicos: Servico[] }) {
-  const [active, setActive] = useState<ServicoSlug>("aec");
+  const [active, setActive] = useState<ServicoSlug>(servicos[0]?.slug ?? "");
   const servico = servicos.find((s) => s.slug === active);
+
+  const areas = AREA_ORDER.map((area) => ({
+    area,
+    servicos: servicos.filter((s) => s.area === area),
+  })).filter((group) => group.servicos.length > 0);
 
   return (
     <div>
-      <div className="flex border-b border-border">
-        {TABS.map((tab) => (
-          <button
-            key={tab.slug}
-            type="button"
-            onClick={() => setActive(tab.slug)}
-            className={`h-11 px-5 text-[13px] uppercase tracking-[0.1em] transition-colors ${
-              active === tab.slug
-                ? "border-b-2 border-olive text-ink"
-                : "text-ink-muted hover:text-ink"
-            }`}
-          >
-            {tab.label}
-          </button>
+      <div className="flex flex-col gap-4">
+        {areas.map((group) => (
+          <div key={group.area}>
+            <p className="mb-2 text-xs uppercase tracking-[0.12em] text-ink-muted">
+              {AREA_LABELS[group.area]}
+            </p>
+            <div className="flex flex-wrap border-b border-border">
+              {group.servicos.map((s) => (
+                <button
+                  key={s.slug}
+                  type="button"
+                  onClick={() => setActive(s.slug)}
+                  className={`h-11 px-5 text-[13px] uppercase tracking-[0.1em] transition-colors ${
+                    active === s.slug
+                      ? "border-b-2 border-olive text-ink"
+                      : "text-ink-muted hover:text-ink"
+                  }`}
+                >
+                  {s.titulo}
+                </button>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
       <div className="mt-6">{servico && <ServicoFormFields key={servico.slug} servico={servico} />}</div>

@@ -21,10 +21,14 @@ export type Sobre = {
   imageAlt: string;
 };
 
-export type ServicoSlug = "aec" | "caf" | "aaaf" | "ferias" | "assistentes";
+export type ServicoArea = "educacao" | "artes-cultura";
+
+/** Free-form: slugs live in the database, not in a closed union here. */
+export type ServicoSlug = string;
 
 export type Servico = {
   slug: ServicoSlug;
+  area: ServicoArea;
   titulo: string;
   resumo: string;
   pontos: string[];

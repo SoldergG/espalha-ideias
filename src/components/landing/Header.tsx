@@ -7,12 +7,14 @@ import { CaretDown, List, X } from "@phosphor-icons/react";
 import { Wordmark } from "./LogoMark";
 import { ContactoModal } from "./ContactoModal";
 
-const ANCHOR_LINKS = [
-  { label: "Sobre", href: "#sobre" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Certificações", href: "#certificacoes" },
-  { label: "Links", href: "#links" },
-  { label: "Contacto", href: "#contacto" },
+/** `anchor` links resolve against the landing page; `route` links are their own pages. */
+const NAV_LINKS = [
+  { label: "Sobre", href: "#sobre", type: "anchor" as const },
+  { label: "Serviços", href: "#servicos", type: "anchor" as const },
+  { label: "Artes & Cultura", href: "/artes-cultura", type: "route" as const },
+  { label: "Certificações", href: "#certificacoes", type: "anchor" as const },
+  { label: "Links", href: "#links", type: "anchor" as const },
+  { label: "Contacto", href: "#contacto", type: "anchor" as const },
 ];
 
 const MAIS_LINKS = [
@@ -40,15 +42,25 @@ export function Header() {
 
         <div className="hidden items-center gap-10 lg:flex">
           <nav className="flex items-center gap-9">
-          {ANCHOR_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={onHome ? link.href : `/${link.href}`}
-              className="text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.type === "route" ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={onHome ? link.href : `/${link.href}`}
+                className="text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
+              >
+                {link.label}
+              </a>
+            )
+          )}
 
           <div
             className="group relative"
@@ -109,16 +121,27 @@ export function Header() {
       {open && (
         <div className="border-t border-border bg-cream px-4 pb-6 pt-2 lg:hidden">
           <nav className="flex flex-col">
-            {ANCHOR_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={onHome ? link.href : `/${link.href}`}
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted"
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.type === "route" ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={onHome ? link.href : `/${link.href}`}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
             {MAIS_LINKS.map((link) => (
               <Link
                 key={link.href}
