@@ -21,6 +21,8 @@ const MAIS_LINKS = [
   { label: "Encarregados de Educação", href: "/encarregados-educacao" },
 ];
 
+const RECRUTAMENTO_URL = "https://portalei.espalhaideias.pt";
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const [maisOpen, setMaisOpen] = useState(false);
@@ -72,6 +74,13 @@ export function Header() {
               </div>
             )}
           </div>
+
+          <a
+            href={RECRUTAMENTO_URL}
+            className="text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
+          >
+            Recrutamento
+          </a>
         </nav>
 
         <div className="hidden lg:block">
@@ -117,6 +126,13 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={RECRUTAMENTO_URL}
+              onClick={() => setOpen(false)}
+              className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted last:border-b-0"
+            >
+              Recrutamento
+            </a>
           </nav>
           <a
             href={onHome ? "#contacto" : "/#contacto"}
