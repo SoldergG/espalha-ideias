@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Hero as HeroContent } from "@/lib/content/types";
 import { RevealOnScroll } from "./RevealOnScroll";
 
@@ -32,14 +31,18 @@ export function Hero({ content }: { content: HeroContent }) {
 
         <RevealOnScroll delay={0.1}>
           <div className="relative aspect-[4/5] w-full overflow-hidden border border-border">
-            <Image
-              src={content.imageSrc}
-              alt={content.imageAlt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 480px, 90vw"
-              className="object-cover"
-            />
+            <video
+              className="h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={content.imageSrc}
+              aria-label={content.imageAlt}
+            >
+              <source src="/videos/criancas-atividades.mp4" type="video/mp4" />
+            </video>
           </div>
         </RevealOnScroll>
       </div>

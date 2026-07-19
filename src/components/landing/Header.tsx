@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CaretDown, List, X } from "@phosphor-icons/react";
 import { Wordmark } from "./LogoMark";
+import { ContactoModal } from "./ContactoModal";
 
 const ANCHOR_LINKS = [
   { label: "Sobre", href: "#sobre" },
@@ -26,6 +27,7 @@ const RECRUTAMENTO_URL = "https://portalei.espalhaideias.pt";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [maisOpen, setMaisOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const pathname = usePathname();
   const onHome = pathname === "/";
 
@@ -36,7 +38,8 @@ export function Header() {
           <Wordmark className="font-display text-lg tracking-[0.2em] text-ink sm:text-xl" />
         </Link>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <div className="hidden items-center gap-10 lg:flex">
+          <nav className="flex items-center gap-9">
           {ANCHOR_LINKS.map((link) => (
             <a
               key={link.href}
@@ -81,15 +84,15 @@ export function Header() {
           >
             Recrutamento
           </a>
-        </nav>
+          </nav>
 
-        <div className="hidden lg:block">
-          <a
-            href={onHome ? "#contacto" : "/#contacto"}
+          <button
+            type="button"
+            onClick={() => setContactOpen(true)}
             className="inline-flex h-11 items-center bg-orange px-6 text-[13px] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-orange-dark hover:text-cream"
           >
-            Pedir proposta
-          </a>
+            Pedido de contacto
+          </button>
         </div>
 
         <button
@@ -134,15 +137,20 @@ export function Header() {
               Recrutamento
             </a>
           </nav>
-          <a
-            href={onHome ? "#contacto" : "/#contacto"}
-            onClick={() => setOpen(false)}
-            className="mt-4 flex h-11 items-center justify-center bg-orange text-center text-[13px] font-medium uppercase tracking-[0.12em] text-ink"
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              setContactOpen(true);
+            }}
+            className="mt-4 flex h-11 w-full items-center justify-center bg-orange text-center text-[13px] font-medium uppercase tracking-[0.12em] text-ink"
           >
-            Pedir proposta
-          </a>
+            Pedido de contacto
+          </button>
         </div>
       )}
+
+      <ContactoModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </header>
   );
 }
