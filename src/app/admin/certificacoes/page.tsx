@@ -28,8 +28,13 @@ export default async function CertificacoesPage() {
       </Link>
 
       <div className="flex flex-col gap-3">
-        {(certificacoes ?? []).map((certificacao) => (
-          <CertificacaoRow key={certificacao.id} certificacao={certificacao} />
+        {(certificacoes ?? []).map((certificacao, index) => (
+          <CertificacaoRow
+            key={certificacao.id}
+            certificacao={certificacao}
+            isFirst={index === 0}
+            isLast={index === (certificacoes ?? []).length - 1}
+          />
         ))}
         {certificacoes?.length === 0 && (
           <p className="text-sm text-ink-muted">Ainda não há certificações.</p>

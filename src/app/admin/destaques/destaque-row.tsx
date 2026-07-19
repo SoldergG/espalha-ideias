@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { ConfirmDeleteButton } from "@/components/admin/ConfirmDeleteButton";
-import { deleteDestaqueAction, toggleDestaquePublicadoAction } from "./actions";
+import { MoveButtons } from "@/components/admin/MoveButtons";
+import { deleteDestaqueAction, moveDestaqueAction, toggleDestaquePublicadoAction } from "./actions";
 
 type DestaqueRowData = {
   id: string;
@@ -11,7 +12,15 @@ type DestaqueRowData = {
   publicado: boolean;
 };
 
-export function DestaqueRow({ destaque }: { destaque: DestaqueRowData }) {
+export function DestaqueRow({
+  destaque,
+  isFirst,
+  isLast,
+}: {
+  destaque: DestaqueRowData;
+  isFirst: boolean;
+  isLast: boolean;
+}) {
   return (
     <div className="flex items-center justify-between gap-4 border border-border bg-paper p-4">
       <div>
@@ -19,6 +28,11 @@ export function DestaqueRow({ destaque }: { destaque: DestaqueRowData }) {
         <p className="text-xs text-ink-muted">{destaque.data_destaque ?? "sem data"}</p>
       </div>
       <div className="flex items-center gap-4">
+        <MoveButtons
+          isFirst={isFirst}
+          isLast={isLast}
+          onMove={(direction) => moveDestaqueAction(destaque.id, direction)}
+        />
         <label className="flex items-center gap-2 text-xs uppercase tracking-[0.08em] text-ink-muted">
           <input
             type="checkbox"

@@ -41,6 +41,7 @@ export type Destaque = {
   titulo: string;
   resumo: string;
   dataDestaque: string;
+  linkHref: string | null;
   imageSrc: string;
   imageAlt: string;
 };
@@ -87,7 +88,6 @@ export type Noticia = NoticiaResumo & {
 export type EncarregadosEducacao = {
   texto: string;
   portalUrl: string;
-  fichaInscricaoUrl: string;
 };
 
 export type SiteContent = {

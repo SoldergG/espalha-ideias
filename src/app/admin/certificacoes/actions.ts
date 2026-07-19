@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { requireAdminSession } from "@/lib/auth/require-admin";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { uploadImageIfPresent } from "@/lib/content/upload-image";
+import { moveRow, type Direction } from "@/lib/content/reorder";
 import type { SectionFormState } from "../hero-sobre/actions";
 
 function readCertificacaoFields(formData: FormData) {
@@ -102,6 +103,13 @@ export async function deleteCertificacaoAction(id: string) {
   await requireAdminSession();
   const { error } = await supabaseAdmin.from("certificacoes").delete().eq("id", id);
   if (error) throw error;
+  revalidatePath("/");
+  revalidatePath("/admin/certificacoes");
+}
+
+export async function moveCertificacaoAction(id: string, direction: Direction) {
+  await requireAdminSession();
+  await moveRow("certificacoes", id, direction);
   revalidatePath("/");
   revalidatePath("/admin/certificacoes");
 }

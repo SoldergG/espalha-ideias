@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { requireAdminSession } from "@/lib/auth/require-admin";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { uploadImageIfPresent } from "@/lib/content/upload-image";
+import { moveRow, type Direction } from "@/lib/content/reorder";
 import type { SectionFormState } from "../hero-sobre/actions";
 
 function slugify(titulo: string): string {
@@ -93,6 +94,13 @@ export async function deleteNoticiaAction(id: string) {
   await requireAdminSession();
   const { error } = await supabaseAdmin.from("noticias").delete().eq("id", id);
   if (error) throw error;
+  revalidatePath("/noticias");
+  revalidatePath("/admin/noticias");
+}
+
+export async function moveNoticiaAction(id: string, direction: Direction) {
+  await requireAdminSession();
+  await moveRow("noticias", id, direction);
   revalidatePath("/noticias");
   revalidatePath("/admin/noticias");
 }

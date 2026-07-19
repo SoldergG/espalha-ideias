@@ -21,8 +21,13 @@ export default async function DestaquesPage() {
       </Link>
 
       <div className="flex flex-col gap-3">
-        {(data ?? []).map((destaque) => (
-          <DestaqueRow key={destaque.id} destaque={destaque} />
+        {(data ?? []).map((destaque, index) => (
+          <DestaqueRow
+            key={destaque.id}
+            destaque={destaque}
+            isFirst={index === 0}
+            isLast={index === (data ?? []).length - 1}
+          />
         ))}
         {data?.length === 0 && <p className="text-sm text-ink-muted">Ainda não há destaques.</p>}
       </div>

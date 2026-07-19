@@ -20,8 +20,13 @@ export default async function NoticiasAdminPage() {
       </Link>
 
       <div className="flex flex-col gap-3">
-        {(data ?? []).map((noticia) => (
-          <NoticiaRow key={noticia.id} noticia={noticia} />
+        {(data ?? []).map((noticia, index) => (
+          <NoticiaRow
+            key={noticia.id}
+            noticia={noticia}
+            isFirst={index === 0}
+            isLast={index === (data ?? []).length - 1}
+          />
         ))}
         {data?.length === 0 && <p className="text-sm text-ink-muted">Ainda não há notícias.</p>}
       </div>

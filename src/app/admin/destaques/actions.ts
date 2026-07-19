@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { requireAdminSession } from "@/lib/auth/require-admin";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { uploadImageIfPresent } from "@/lib/content/upload-image";
+import { moveRow, type Direction } from "@/lib/content/reorder";
 import type { SectionFormState } from "../hero-sobre/actions";
 
 function readDestaqueFields(formData: FormData) {
@@ -80,6 +81,13 @@ export async function deleteDestaqueAction(id: string) {
   await requireAdminSession();
   const { error } = await supabaseAdmin.from("destaques").delete().eq("id", id);
   if (error) throw error;
+  revalidatePath("/");
+  revalidatePath("/admin/destaques");
+}
+
+export async function moveDestaqueAction(id: string, direction: Direction) {
+  await requireAdminSession();
+  await moveRow("destaques", id, direction, { column: "data_destaque", ascending: false });
   revalidatePath("/");
   revalidatePath("/admin/destaques");
 }

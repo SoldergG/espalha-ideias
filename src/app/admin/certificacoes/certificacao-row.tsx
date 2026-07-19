@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { ConfirmDeleteButton } from "@/components/admin/ConfirmDeleteButton";
-import { deleteCertificacaoAction, toggleCertificacaoPublicadoAction } from "./actions";
+import { MoveButtons } from "@/components/admin/MoveButtons";
+import {
+  deleteCertificacaoAction,
+  moveCertificacaoAction,
+  toggleCertificacaoPublicadoAction,
+} from "./actions";
 
 type CertificacaoRowData = {
   id: string;
@@ -10,11 +15,24 @@ type CertificacaoRowData = {
   publicado: boolean;
 };
 
-export function CertificacaoRow({ certificacao }: { certificacao: CertificacaoRowData }) {
+export function CertificacaoRow({
+  certificacao,
+  isFirst,
+  isLast,
+}: {
+  certificacao: CertificacaoRowData;
+  isFirst: boolean;
+  isLast: boolean;
+}) {
   return (
     <div className="flex items-center justify-between gap-4 border border-border bg-paper p-4">
       <p className="font-display text-lg text-ink">{certificacao.titulo}</p>
       <div className="flex items-center gap-4">
+        <MoveButtons
+          isFirst={isFirst}
+          isLast={isLast}
+          onMove={(direction) => moveCertificacaoAction(certificacao.id, direction)}
+        />
         <label className="flex items-center gap-2 text-xs uppercase tracking-[0.08em] text-ink-muted">
           <input
             type="checkbox"

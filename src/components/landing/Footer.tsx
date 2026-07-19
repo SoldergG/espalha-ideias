@@ -4,6 +4,7 @@ import { Wordmark } from "./LogoMark";
 const FOOTER_LINKS = [
   { label: "Sobre", href: "/#sobre" },
   { label: "Serviços", href: "/#servicos" },
+  { label: "Artes & Cultura", href: "/artes-cultura" },
   { label: "Links", href: "/#links" },
   { label: "Contacto", href: "/#contacto" },
   { label: "Notícias", href: "/noticias" },

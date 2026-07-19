@@ -15,7 +15,8 @@ export function Contacto({ content }: { content: ContactoContent }) {
         <RevealOnScroll>
           <h2 className="font-display text-3xl text-ink sm:text-4xl">Fale connosco</h2>
           <p className="mt-4 max-w-[50ch] text-base leading-relaxed text-ink-muted">
-            Escolas, autarquias e famílias podem pedir uma proposta adaptada à sua realidade.
+            Escolas, autarquias, instituições culturais e famílias podem pedir uma proposta
+            adaptada à sua realidade.
           </p>
 
           <div className="mt-8 flex flex-col gap-5">

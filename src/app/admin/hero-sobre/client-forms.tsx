@@ -55,7 +55,15 @@ export function HeroForm({ hero }: { hero: Hero }) {
           <input name="cta_href" defaultValue={hero.ctaPrimaryHref} className={inputClass} />
         </Field>
       </div>
-      <ImageUploadField name="image" label="Imagem" currentImageSrc={hero.imageSrc} />
+      <ImageUploadField
+        name="image"
+        label="Imagem de fundo do vídeo"
+        currentImageSrc={hero.imageSrc}
+      />
+      <p className="-mt-2 text-xs leading-relaxed text-ink-muted">
+        O hero mostra um vídeo. Esta imagem só aparece enquanto o vídeo carrega ou se ele não
+        conseguir reproduzir. O vídeo em si não é editável aqui.
+      </p>
       <Field label="Texto alternativo da imagem">
         <input name="image_alt" defaultValue={hero.imageAlt} className={inputClass} />
       </Field>

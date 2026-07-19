@@ -94,6 +94,7 @@ async function getDestaquesPublicados(): Promise<Destaque[]> {
     titulo: row.titulo,
     resumo: row.resumo,
     dataDestaque: formatDataDestaque(row.data_destaque),
+    linkHref: row.link_href,
     imageSrc: row.image_path,
     imageAlt: row.image_alt,
   }));
@@ -203,7 +204,6 @@ export async function getEncarregadosEducacao(): Promise<EncarregadosEducacao> {
   return {
     texto: row.texto,
     portalUrl: row.portal_url,
-    fichaInscricaoUrl: row.ficha_inscricao_url,
   };
 }
 

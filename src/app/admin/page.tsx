@@ -4,10 +4,11 @@ import { AdminShell } from "@/components/admin/AdminShell";
 
 const SECTIONS = [
   { label: "Hero & Sobre", href: "/admin/hero-sobre", description: "Texto e imagem de destaque e da secção Quem Somos" },
-  { label: "Serviços", href: "/admin/servicos", description: "AEC, Componente de Apoio à Família e Férias" },
+  { label: "Serviços", href: "/admin/servicos", description: "Educação e Artes & Cultura" },
   { label: "Destaques", href: "/admin/destaques", description: "Novidades mostradas na landing page" },
   { label: "Notícias", href: "/admin/noticias", description: "Arquivo de comunicados e recrutamento" },
   { label: "Certificações", href: "/admin/certificacoes", description: "Selos e distinções da empresa" },
+  { label: "Encarregados de Educação", href: "/admin/encarregados", description: "Texto e ligação para o Portal Ei!" },
   { label: "Contacto", href: "/admin/contacto", description: "Morada, telefone, email e redes sociais" },
 ];
 

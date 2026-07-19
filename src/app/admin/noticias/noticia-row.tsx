@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { ConfirmDeleteButton } from "@/components/admin/ConfirmDeleteButton";
-import { deleteNoticiaAction, toggleNoticiaPublicadoAction } from "./actions";
+import { MoveButtons } from "@/components/admin/MoveButtons";
+import { deleteNoticiaAction, moveNoticiaAction, toggleNoticiaPublicadoAction } from "./actions";
 
 type NoticiaRowData = {
   id: string;
@@ -12,7 +13,15 @@ type NoticiaRowData = {
   publicado: boolean;
 };
 
-export function NoticiaRow({ noticia }: { noticia: NoticiaRowData }) {
+export function NoticiaRow({
+  noticia,
+  isFirst,
+  isLast,
+}: {
+  noticia: NoticiaRowData;
+  isFirst: boolean;
+  isLast: boolean;
+}) {
   return (
     <div className="flex items-center justify-between gap-4 border border-border bg-paper p-4">
       <div>
@@ -23,6 +32,11 @@ export function NoticiaRow({ noticia }: { noticia: NoticiaRowData }) {
         </p>
       </div>
       <div className="flex items-center gap-4">
+        <MoveButtons
+          isFirst={isFirst}
+          isLast={isLast}
+          onMove={(direction) => moveNoticiaAction(noticia.id, direction)}
+        />
         <label className="flex items-center gap-2 text-xs uppercase tracking-[0.08em] text-ink-muted">
           <input
             type="checkbox"
