@@ -17,14 +17,15 @@ const NAV_LINKS = [
   { label: "Contacto", href: "#contacto", type: "anchor" as const },
 ];
 
-const MAIS_LINKS = [
-  { label: "Notícias", href: "/noticias" },
-  { label: "Imprensa", href: "/imprensa" },
-  { label: "Agenda", href: "/agenda" },
-  { label: "Encarregados de Educação", href: "/encarregados-educacao" },
-];
-
 const RECRUTAMENTO_URL = "https://portalei.espalhaideias.pt";
+
+const MAIS_LINKS = [
+  { label: "Notícias", href: "/noticias", external: false },
+  { label: "Imprensa", href: "/imprensa", external: false },
+  { label: "Agenda", href: "/agenda", external: false },
+  { label: "Encarregados de Educação", href: "/encarregados-educacao", external: false },
+  { label: "Recrutamento", href: RECRUTAMENTO_URL, external: true },
+];
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -36,7 +37,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-cream/95 backdrop-blur">
       <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href={onHome ? "#top" : "/"} aria-label="Espalha Ideias — início">
+        <Link
+          href={onHome ? "#top" : "/"}
+          aria-label="Espalha Ideias — início"
+          className="shrink-0"
+        >
           {/* unoptimized: serve o PNG (20KB) tal e qual, sem o otimizador do Next */}
           <Image
             src="/images/logo-espalha-ideias.png"
@@ -49,8 +54,8 @@ export function Header() {
           />
         </Link>
 
-        <div className="hidden items-center gap-8 xl:flex">
-          <nav className="flex items-center gap-7">
+        <div className="hidden min-w-0 items-center gap-6 xl:flex">
+          <nav className="flex items-center gap-5">
           {NAV_LINKS.map((link) =>
             link.type === "route" ? (
               <Link
@@ -86,25 +91,29 @@ export function Header() {
             </button>
             {maisOpen && (
               <div className="absolute left-1/2 top-full w-64 -translate-x-1/2 border border-border bg-paper py-2 shadow-sm">
-                {MAIS_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="block px-4 py-2.5 text-[13px] uppercase tracking-[0.1em] text-ink-muted transition-colors hover:bg-cream-soft hover:text-ink"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {MAIS_LINKS.map((link) =>
+                  link.external ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="block px-4 py-2.5 text-[13px] uppercase tracking-[0.1em] text-ink-muted transition-colors hover:bg-cream-soft hover:text-ink"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="block px-4 py-2.5 text-[13px] uppercase tracking-[0.1em] text-ink-muted transition-colors hover:bg-cream-soft hover:text-ink"
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </div>
             )}
           </div>
 
-          <a
-            href={RECRUTAMENTO_URL}
-            className="whitespace-nowrap text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
-          >
-            Recrutamento
-          </a>
           </nav>
 
           <button
@@ -151,23 +160,27 @@ export function Header() {
                 </a>
               )
             )}
-            {MAIS_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted last:border-b-0"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href={RECRUTAMENTO_URL}
-              onClick={() => setOpen(false)}
-              className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted last:border-b-0"
-            >
-              Recrutamento
-            </a>
+            {MAIS_LINKS.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted last:border-b-0"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border py-3.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted last:border-b-0"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
           <button
             type="button"
