@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CaretDown, List, X } from "@phosphor-icons/react";
-import { Wordmark } from "./LogoMark";
 import { ContactoModal } from "./ContactoModal";
 
 /** `anchor` links resolve against the landing page; `route` links are their own pages. */
@@ -36,8 +36,15 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-cream/95 backdrop-blur">
       <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href={onHome ? "#top" : "/"}>
-          <Wordmark className="font-display text-lg tracking-[0.2em] text-ink sm:text-xl" />
+        <Link href={onHome ? "#top" : "/"} aria-label="Espalha Ideias — início">
+          <Image
+            src="/images/logo-espalha-ideias.png"
+            alt="Espalha Ideias"
+            width={277}
+            height={67}
+            priority
+            className="h-8 w-auto sm:h-10"
+          />
         </Link>
 
         <div className="hidden items-center gap-8 xl:flex">
