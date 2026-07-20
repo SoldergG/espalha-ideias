@@ -37,12 +37,14 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border bg-cream/95 backdrop-blur">
       <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href={onHome ? "#top" : "/"} aria-label="Espalha Ideias — início">
+          {/* unoptimized: serve o PNG (20KB) tal e qual, sem o otimizador do Next */}
           <Image
             src="/images/logo-espalha-ideias.png"
             alt="Espalha Ideias"
             width={277}
             height={67}
             priority
+            unoptimized
             className="h-8 w-auto sm:h-10"
           />
         </Link>
