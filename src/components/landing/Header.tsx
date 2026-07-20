@@ -7,19 +7,27 @@ import { usePathname } from "next/navigation";
 import { CaretDown, List, X } from "@phosphor-icons/react";
 import { ContactoModal } from "./ContactoModal";
 
-/** `anchor` links resolve against the landing page; `route` links are their own pages. */
+/**
+ * `anchor` links resolve against the landing page; `route` links are their own
+ * pages.
+ *
+ * Keep this list short. The header is capped at max-w-6xl (1152px) regardless
+ * of screen size, and logo + nav + CTA only fit inside ~1104px of usable width.
+ * Six entries plus the CTA overflowed and squeezed the logo out entirely.
+ * Anything secondary belongs in MAIS_LINKS.
+ */
 const NAV_LINKS = [
   { label: "Sobre", href: "#sobre", type: "anchor" as const },
   { label: "Serviços", href: "#servicos", type: "anchor" as const },
   { label: "Artes & Cultura", href: "/artes-cultura", type: "route" as const },
-  { label: "Certificações", href: "#certificacoes", type: "anchor" as const },
-  { label: "Links", href: "#links", type: "anchor" as const },
   { label: "Contacto", href: "#contacto", type: "anchor" as const },
 ];
 
 const RECRUTAMENTO_URL = "https://portalei.espalhaideias.pt";
 
 const MAIS_LINKS = [
+  { label: "Certificações", href: "/#certificacoes", external: false },
+  { label: "Links", href: "/#links", external: false },
   { label: "Notícias", href: "/noticias", external: false },
   { label: "Imprensa", href: "/imprensa", external: false },
   { label: "Agenda", href: "/agenda", external: false },
