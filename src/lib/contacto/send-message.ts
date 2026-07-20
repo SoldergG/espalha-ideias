@@ -1,6 +1,7 @@
 "use server";
 
 import { getContacto } from "@/lib/content/queries";
+import { formatarTelemovel, isTelemovelValido, TELEMOVEL_INVALIDO } from "./telemovel";
 
 export type ContactoFormState = {
   success?: boolean;
@@ -31,11 +32,14 @@ export async function enviarMensagemContacto(
   const telefone = String(formData.get("telefone") ?? "").trim();
   const mensagem = String(formData.get("mensagem") ?? "").trim();
 
-  if (!nome || !email || !mensagem) {
-    return { error: "Preencha o nome, o email e a mensagem." };
+  if (!nome || !email || !telefone || !mensagem) {
+    return { error: "Preencha o nome, o email, o telemóvel e a mensagem." };
   }
   if (!EMAIL_RE.test(email)) {
     return { error: "Introduza um email válido." };
+  }
+  if (!isTelemovelValido(telefone)) {
+    return { error: TELEMOVEL_INVALIDO };
   }
   if (mensagem.length > 5000) {
     return { error: "A mensagem é demasiado longa." };
@@ -62,10 +66,12 @@ export async function enviarMensagemContacto(
 
   const remetente = process.env.CONTACT_FROM_EMAIL ?? "Espalha Ideias <onboarding@resend.dev>";
 
+  const telemovel = formatarTelemovel(telefone);
+
   const linhas = [
     `Nome: ${nome}`,
     `Email: ${email}`,
-    `Telefone: ${telefone || "—"}`,
+    `Telemóvel: ${telemovel}`,
     "",
     "Mensagem:",
     mensagem,
@@ -76,7 +82,7 @@ export async function enviarMensagemContacto(
       <h2 style="margin: 0 0 16px;">Novo pedido de contacto</h2>
       <p><strong>Nome:</strong> ${escapeHtml(nome)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-      <p><strong>Telefone:</strong> ${escapeHtml(telefone || "—")}</p>
+      <p><strong>Telemóvel:</strong> ${escapeHtml(telemovel)}</p>
       <p style="margin-top: 16px;"><strong>Mensagem:</strong></p>
       <p style="white-space: pre-wrap;">${escapeHtml(mensagem)}</p>
     </div>

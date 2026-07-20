@@ -1,8 +1,10 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X } from "@phosphor-icons/react";
 import { enviarMensagemContacto, type ContactoFormState } from "@/lib/contacto/send-message";
+import { isTelemovelValido, TELEMOVEL_INVALIDO } from "@/lib/contacto/telemovel";
 
 const initialState: ContactoFormState = {};
 
@@ -12,6 +14,10 @@ const inputClass =
 export function ContactoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [state, action, pending] = useActionState(enviarMensagemContacto, initialState);
   const firstFieldRef = useRef<HTMLInputElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [erroTelemovel, setErroTelemovel] = useState<string | null>(null);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -27,11 +33,13 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
-  return (
+  // Renderizado no <body>: o <header> tem backdrop-blur, e backdrop-filter cria
+  // um bloco de contenção que prendia este "fixed" à caixa do cabeçalho.
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="contacto-modal-title"
@@ -42,7 +50,7 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
         aria-hidden="true"
       />
 
-      <div className="relative z-10 w-full max-w-lg overflow-hidden border border-border bg-paper shadow-lg">
+      <div className="relative z-10 my-auto max-h-full w-full max-w-lg overflow-y-auto border border-border bg-paper shadow-lg">
         <div className="flex items-center justify-between border-b border-border px-6 py-4">
           <h2 id="contacto-modal-title" className="font-display text-xl text-ink">
             Pedido de contacto
@@ -74,8 +82,8 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
         ) : (
           <form action={action} className="flex flex-col gap-4 px-6 py-6">
             <p className="text-sm leading-relaxed text-ink-muted">
-              Escolas, autarquias e famílias: envie-nos uma mensagem e responderemos com uma proposta
-              adaptada à sua realidade.
+              Escolas, autarquias, instituições culturais e famílias: envie-nos uma mensagem e
+              responderemos com uma proposta adaptada à sua realidade.
             </p>
 
             {/* Honeypot anti-spam — escondido dos utilizadores */}
@@ -103,9 +111,30 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
               </div>
               <div>
                 <label htmlFor="contacto-telefone" className="block text-sm font-medium text-ink">
-                  Telefone <span className="text-ink-muted">(opcional)</span>
+                  Telemóvel
                 </label>
-                <input id="contacto-telefone" name="telefone" type="tel" className={inputClass} />
+                <input
+                  id="contacto-telefone"
+                  name="telefone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  required
+                  placeholder="912 345 678"
+                  aria-invalid={erroTelemovel ? true : undefined}
+                  aria-describedby={erroTelemovel ? "contacto-telefone-erro" : undefined}
+                  onBlur={(event) => {
+                    const valor = event.target.value.trim();
+                    setErroTelemovel(!valor || isTelemovelValido(valor) ? null : TELEMOVEL_INVALIDO);
+                  }}
+                  onChange={() => erroTelemovel && setErroTelemovel(null)}
+                  className={`${inputClass} ${erroTelemovel ? "border-orange-dark" : ""}`}
+                />
+                {erroTelemovel && (
+                  <p id="contacto-telefone-erro" className="mt-1.5 text-xs text-orange-dark">
+                    {erroTelemovel}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -147,6 +176,7 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
           </form>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

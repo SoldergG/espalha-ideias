@@ -40,14 +40,14 @@ export function Header() {
           <Wordmark className="font-display text-lg tracking-[0.2em] text-ink sm:text-xl" />
         </Link>
 
-        <div className="hidden items-center gap-10 lg:flex">
-          <nav className="flex items-center gap-9">
+        <div className="hidden items-center gap-8 xl:flex">
+          <nav className="flex items-center gap-7">
           {NAV_LINKS.map((link) =>
             link.type === "route" ? (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
+                className="whitespace-nowrap text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
               >
                 {link.label}
               </Link>
@@ -55,7 +55,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={onHome ? link.href : `/${link.href}`}
-                className="text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
+                className="whitespace-nowrap text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
               >
                 {link.label}
               </a>
@@ -70,7 +70,7 @@ export function Header() {
             <button
               type="button"
               aria-expanded={maisOpen}
-              className="flex items-center gap-1 text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
+              className="flex items-center gap-1 whitespace-nowrap text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
             >
               Mais
               <CaretDown size={12} weight="bold" />
@@ -92,7 +92,7 @@ export function Header() {
 
           <a
             href={RECRUTAMENTO_URL}
-            className="text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
+            className="whitespace-nowrap text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
           >
             Recrutamento
           </a>
@@ -101,7 +101,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setContactOpen(true)}
-            className="inline-flex h-11 items-center bg-orange px-6 text-[13px] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-orange-dark hover:text-cream"
+            className="inline-flex h-11 shrink-0 items-center whitespace-nowrap bg-orange px-6 text-[13px] font-medium uppercase tracking-[0.12em] text-ink transition-colors hover:bg-orange-dark hover:text-cream"
           >
             Pedido de contacto
           </button>
@@ -112,14 +112,14 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
-          className="flex h-10 w-10 items-center justify-center text-ink lg:hidden"
+          className="flex h-10 w-10 items-center justify-center text-ink xl:hidden"
         >
           {open ? <X size={22} weight="light" /> : <List size={22} weight="light" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-cream px-4 pb-6 pt-2 lg:hidden">
+        <div className="border-t border-border bg-cream px-4 pb-6 pt-2 xl:hidden">
           <nav className="flex flex-col">
             {NAV_LINKS.map((link) =>
               link.type === "route" ? (
