@@ -3,6 +3,7 @@ import { getServicos } from "@/lib/content/queries";
 import { PageHeader } from "@/components/landing/PageHeader";
 import { RevealOnScroll } from "@/components/landing/RevealOnScroll";
 import { ServicoCard } from "@/components/landing/ServicoCard";
+import { VideoBanner } from "@/components/landing/VideoBanner";
 
 export const metadata: Metadata = {
   title: "Artes & Cultura — Espalha Ideias",
@@ -20,7 +21,13 @@ export default async function ArtesCulturaPage() {
         intro="A Espalha Ideias coloca equipas especializadas em museus, centros culturais, teatros, salas de espetáculos e outros espaços artísticos, assegurando o acolhimento do público e o funcionamento diário dos equipamentos."
       />
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <VideoBanner
+          src="/videos/artes-cultura-museu.mp4"
+          poster="/images/artes-cultura-museu.jpg"
+          ariaLabel="Visitantes a percorrer as salas de um museu"
+        />
+
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {servicos.map((servico, index) => (
             <RevealOnScroll key={servico.slug} delay={index * 0.08}>
               <ServicoCard servico={servico} />

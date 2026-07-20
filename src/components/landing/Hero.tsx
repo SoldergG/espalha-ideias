@@ -61,7 +61,7 @@ export function Hero({ content }: { content: HeroContent }) {
               poster={content.imageSrc}
               aria-label={content.imageAlt}
             >
-              <source src="/videos/criancas-atividades.mp4" type="video/mp4" />
+              <source src="/videos/motricidade-infantil.mp4" type="video/mp4" />
             </video>
           </div>
         </RevealOnScroll>
