@@ -1,5 +1,4 @@
 import { FacebookLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
-import { Wordmark } from "./LogoMark";
 
 const FOOTER_LINKS = [
   { label: "Sobre", href: "/#sobre" },
@@ -25,21 +24,19 @@ export function Footer({
   return (
     <footer className="border-t border-border bg-cream-soft">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <Wordmark className="font-display text-base tracking-[0.2em] text-ink" />
-
-        <nav className="flex flex-wrap items-center gap-6">
+        <nav className="-mx-4 flex items-center gap-4 overflow-x-auto whitespace-nowrap px-4 sm:mx-0 sm:px-0">
           {FOOTER_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-[13px] uppercase tracking-[0.1em] text-ink-muted hover:text-ink"
+              className="shrink-0 text-[11px] uppercase tracking-[0.08em] text-ink-muted hover:text-ink"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-4">
           <a
             href={facebookUrl}
             target="_blank"
@@ -63,7 +60,8 @@ export function Footer({
       <div className="border-t border-border px-4 py-5 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs text-ink-muted">
-            © {new Date().getFullYear()} Espalha Ideias. Todos os direitos reservados.
+            © {new Date().getFullYear()} Espalha Ideias. Todos os direitos reservados. site{" "}
+            <em>powered</em> by Via Educação
             {pessoasContacto.length > 0 && <> · {pessoasContacto.join(" · ")}</>}
           </p>
         </div>
