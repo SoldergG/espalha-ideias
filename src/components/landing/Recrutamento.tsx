@@ -7,10 +7,10 @@ import { RevealOnScroll } from "./RevealOnScroll";
  * Os dois caminhos do texto — procurar vagas em aberto ou enviar candidatura
  * espontânea — são dois botões, cada um para o seu destino no Portal Ei!.
  *
- * "Oportunidades em aberto" aponta para a raiz do portal, onde as vagas são
- * listadas; uma vaga específica usa o formato `/?vaga=<ID>`.
+ * "Oportunidades em aberto" usa o parâmetro `?vaga=` sem ID, que faz o portal
+ * mostrar a lista de vagas; uma vaga específica usa `/?vaga=<ID>`.
  */
-const URL_OPORTUNIDADES = "https://portalei.espalhaideias.pt/";
+const URL_OPORTUNIDADES = "https://portalei.espalhaideias.pt/?vaga=";
 const URL_ESPONTANEA = "https://portalei.espalhaideias.pt/?candidatura=espontanea";
 
 export function Recrutamento() {
