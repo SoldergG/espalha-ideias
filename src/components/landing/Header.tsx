@@ -23,8 +23,6 @@ const NAV_LINKS = [
   { label: "Contacto", href: "#contacto", type: "anchor" as const },
 ];
 
-const RECRUTAMENTO_URL = "https://portalei.espalhaideias.pt";
-
 const MAIS_LINKS = [
   { label: "Certificações", href: "/#certificacoes", external: false },
   { label: "Links", href: "/#links", external: false },
@@ -32,7 +30,7 @@ const MAIS_LINKS = [
   { label: "Imprensa", href: "/imprensa", external: false },
   { label: "Agenda", href: "/agenda", external: false },
   { label: "Encarregados de Educação", href: "/encarregados-educacao", external: false },
-  { label: "Recrutamento", href: RECRUTAMENTO_URL, external: true },
+  { label: "Recrutamento", href: "/#recrutamento", external: false },
 ];
 
 export function Header() {
