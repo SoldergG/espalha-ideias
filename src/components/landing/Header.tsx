@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CaretDown, List, X } from "@phosphor-icons/react";
 import { ContactoModal } from "./ContactoModal";
+import { LogoAnimado } from "./LogoAnimado";
 
 /**
  * `anchor` links resolve against the landing page; `route` links are their own
@@ -50,16 +50,8 @@ export function Header() {
           aria-label="Espalha Ideias — início"
           className="shrink-0"
         >
-          {/* unoptimized: serve o PNG (20KB) tal e qual, sem o otimizador do Next */}
-          <Image
-            src="/images/logo-espalha-ideias.png"
-            alt="Espalha Ideias"
-            width={277}
-            height={67}
-            priority
-            unoptimized
-            className="h-8 w-auto sm:h-10"
-          />
+          {/* Logo com as duas ventoinhas animadas ao toque (ver LogoAnimado) */}
+          <LogoAnimado className="h-8 sm:h-10" />
         </Link>
 
         <div className="hidden min-w-0 items-center gap-6 xl:flex">
