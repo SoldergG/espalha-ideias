@@ -1,5 +1,12 @@
+import Image from "next/image";
 import { Briefcase, PaperPlaneTilt } from "@phosphor-icons/react/dist/ssr";
 import { RevealOnScroll } from "./RevealOnScroll";
+
+// Fotos de tema (Pexels — licença livre, uso comercial, sem atribuição).
+const FOTOS = [
+  { src: "/images/recrutamento-equipa.jpg", alt: "Equipa a colaborar num projeto de trabalho" },
+  { src: "/images/recrutamento-aperto-mao.jpg", alt: "Aperto de mão numa entrevista de trabalho" },
+];
 
 /**
  * Secção de recrutamento na homepage (#recrutamento).
@@ -47,6 +54,22 @@ export function Recrutamento() {
             </a>
           </div>
         </RevealOnScroll>
+
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {FOTOS.map((foto, index) => (
+            <RevealOnScroll key={foto.src} delay={0.16 + index * 0.08}>
+              <div className="relative aspect-[16/10] overflow-hidden border border-border">
+                <Image
+                  src={foto.src}
+                  alt={foto.alt}
+                  fill
+                  sizes="(min-width: 640px) 560px, 90vw"
+                  className="object-cover"
+                />
+              </div>
+            </RevealOnScroll>
+          ))}
+        </div>
       </div>
     </section>
   );
