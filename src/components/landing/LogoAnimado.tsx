@@ -11,13 +11,15 @@ import Image from "next/image";
  * verde-lima (IDEIAS). Cada peça é uma tela 277x67 transparente com apenas
  * o seu elemento visível — empilhadas com `inset-0` reconstroem o logo exato.
  *
- * Ao tocar/clicar, cada pá gira sobre o seu próprio eixo (transform-origin no
- * centro visual da lente) e abranda até parar. O cone fica sempre imóvel.
+ * Ao tocar/clicar, cada pá roda presa pela ponta interior — o ponto onde
+ * encosta ao cone — como as pás de um cata-vento fixas no eixo, e abranda até
+ * parar. O cone fica sempre imóvel.
  */
 
-// Centro visual de cada pá dentro da tela 277x67, em percentagem.
-const ORIGEM_ESQUERDA = "24% 43%";
-const ORIGEM_DIREITA = "82% 39%";
+// Ponta interior de cada pá (onde encosta ao cone), na tela 277x67, em %.
+// Esquerda encosta em ~(131,29); direita em ~(181,29.5).
+const ORIGEM_ESQUERDA = "47.3% 43.3%";
+const ORIGEM_DIREITA = "65.3% 44%";
 
 const VOLTAS = 3; // 3 voltas completas antes de parar
 const DURACAO = 1500; // ms
