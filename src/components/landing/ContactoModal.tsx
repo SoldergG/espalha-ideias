@@ -4,7 +4,7 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from "@phosphor-icons/react";
 import { enviarMensagemContacto, type ContactoFormState } from "@/lib/contacto/send-message";
-import { isTelemovelValido, TELEMOVEL_INVALIDO } from "@/lib/contacto/telemovel";
+import { isTelefoneValido, TELEFONE_INVALIDO } from "@/lib/contacto/telemovel";
 
 const initialState: ContactoFormState = {};
 
@@ -15,7 +15,7 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
   const [state, action, pending] = useActionState(enviarMensagemContacto, initialState);
   const firstFieldRef = useRef<HTMLInputElement>(null);
   const [mounted, setMounted] = useState(false);
-  const [erroTelemovel, setErroTelemovel] = useState<string | null>(null);
+  const [erroTelefone, setErroTelefone] = useState<string | null>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -111,7 +111,7 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
               </div>
               <div>
                 <label htmlFor="contacto-telefone" className="block text-sm font-medium text-ink">
-                  Telemóvel
+                  Contacto telefónico
                 </label>
                 <input
                   id="contacto-telefone"
@@ -121,43 +121,68 @@ export function ContactoModal({ open, onClose }: { open: boolean; onClose: () =>
                   autoComplete="tel"
                   required
                   placeholder="912 345 678"
-                  aria-invalid={erroTelemovel ? true : undefined}
-                  aria-describedby={erroTelemovel ? "contacto-telefone-erro" : undefined}
+                  aria-invalid={erroTelefone ? true : undefined}
+                  aria-describedby={erroTelefone ? "contacto-telefone-erro" : undefined}
                   onBlur={(event) => {
                     const valor = event.target.value.trim();
-                    setErroTelemovel(!valor || isTelemovelValido(valor) ? null : TELEMOVEL_INVALIDO);
+                    setErroTelefone(!valor || isTelefoneValido(valor) ? null : TELEFONE_INVALIDO);
                   }}
-                  onChange={() => erroTelemovel && setErroTelemovel(null)}
-                  className={`${inputClass} ${erroTelemovel ? "border-orange-dark" : ""}`}
+                  onChange={() => erroTelefone && setErroTelefone(null)}
+                  className={`${inputClass} ${erroTelefone ? "border-orange-dark" : ""}`}
                 />
-                {erroTelemovel && (
+                {erroTelefone && (
                   <p id="contacto-telefone-erro" className="mt-1.5 text-xs text-orange-dark">
-                    {erroTelemovel}
+                    {erroTelefone}
                   </p>
                 )}
               </div>
             </div>
 
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="contacto-email" className="block text-sm font-medium text-ink">
+                  Email
+                </label>
+                <input
+                  id="contacto-email"
+                  name="email"
+                  type="email"
+                  required
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="contacto-entidade" className="block text-sm font-medium text-ink">
+                  Entidade <span className="font-normal text-ink-muted">(opcional)</span>
+                </label>
+                <input
+                  id="contacto-entidade"
+                  name="entidade"
+                  className={inputClass}
+                />
+              </div>
+            </div>
+
             <div>
-              <label htmlFor="contacto-email" className="block text-sm font-medium text-ink">
-                Email
+              <label htmlFor="contacto-assunto" className="block text-sm font-medium text-ink">
+                Assunto
               </label>
               <input
-                id="contacto-email"
-                name="email"
-                type="email"
+                id="contacto-assunto"
+                name="assunto"
                 required
+                maxLength={200}
                 className={inputClass}
               />
             </div>
 
             <div>
-              <label htmlFor="contacto-mensagem" className="block text-sm font-medium text-ink">
-                Mensagem
+              <label htmlFor="contacto-motivos" className="block text-sm font-medium text-ink">
+                Motivos do contacto
               </label>
               <textarea
-                id="contacto-mensagem"
-                name="mensagem"
+                id="contacto-motivos"
+                name="motivos"
                 required
                 rows={5}
                 className={inputClass}

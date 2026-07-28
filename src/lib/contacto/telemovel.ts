@@ -30,3 +30,24 @@ export function formatarTelemovel(valor: string): string {
 
 export const TELEMOVEL_INVALIDO =
   "Introduza um telemóvel português válido (9 dígitos, começado por 91, 92, 93 ou 96).";
+
+/**
+ * Contacto telefónico português — mais abrangente que o telemóvel: aceita
+ * também números fixos (começados por 2) e nómadas/VoIP (começados por 3).
+ * São sempre nove dígitos.
+ */
+const PT_TELEFONE = /^(9[1236]|2\d|3\d)\d{7}$/;
+
+export function isTelefoneValido(valor: string): boolean {
+  return PT_TELEFONE.test(normalizarTelemovel(valor));
+}
+
+/** Formata para apresentação em grupos de três: "210 123 456". */
+export function formatarTelefone(valor: string): string {
+  const n = normalizarTelemovel(valor);
+  if (!PT_TELEFONE.test(n)) return valor;
+  return `${n.slice(0, 3)} ${n.slice(3, 6)} ${n.slice(6)}`;
+}
+
+export const TELEFONE_INVALIDO =
+  "Introduza um contacto telefónico português válido (9 dígitos).";

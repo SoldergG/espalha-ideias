@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import type { Contacto as ContactoContent } from "@/lib/content/types";
 import { RevealOnScroll } from "./RevealOnScroll";
+import { PedirPropostaButton } from "./PedirPropostaButton";
 
 export function Contacto({ content }: { content: ContactoContent }) {
   return (
@@ -77,12 +78,7 @@ export function Contacto({ content }: { content: ContactoContent }) {
             </ul>
           </div>
 
-          <a
-            href={`mailto:${content.email}?subject=${encodeURIComponent("Pedido de proposta")}`}
-            className="mt-8 inline-flex h-12 items-center bg-orange px-7 text-[13px] font-medium uppercase tracking-[0.14em] text-ink transition-colors hover:bg-orange-dark hover:text-cream"
-          >
-            Pedir proposta
-          </a>
+          <PedirPropostaButton />
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.1}>
