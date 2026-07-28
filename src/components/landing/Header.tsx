@@ -21,6 +21,7 @@ const NAV_LINKS = [
   { label: "Serviços", href: "#servicos", type: "anchor" as const },
   { label: "Artes & Cultura", href: "/artes-cultura", type: "route" as const },
   { label: "Contacto", href: "#contacto", type: "anchor" as const },
+  { label: "Recrutamento", href: "#recrutamento", type: "anchor" as const },
 ];
 
 const MAIS_LINKS = [
@@ -30,7 +31,6 @@ const MAIS_LINKS = [
   { label: "Imprensa", href: "/imprensa", external: false },
   { label: "Agenda", href: "/agenda", external: false },
   { label: "Encarregados de Educação", href: "/encarregados-educacao", external: false },
-  { label: "Recrutamento", href: "/#recrutamento", external: false },
 ];
 
 export function Header() {
