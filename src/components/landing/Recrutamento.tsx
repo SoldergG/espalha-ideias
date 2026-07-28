@@ -5,11 +5,13 @@ import { RevealOnScroll } from "./RevealOnScroll";
  * Secção de recrutamento na homepage (#recrutamento).
  *
  * Os dois caminhos do texto — procurar vagas em aberto ou enviar candidatura
- * espontânea — são dois botões. Por agora ambos abrem o Portal Ei!; quando
- * existirem endereços distintos, basta trocar cada href abaixo.
+ * espontânea — são dois botões, cada um para o seu destino no Portal Ei!.
+ *
+ * "Oportunidades em aberto" aponta para a raiz do portal, onde as vagas são
+ * listadas; uma vaga específica usa o formato `/?vaga=<ID>`.
  */
-const URL_OPORTUNIDADES = "https://portalei.espalhaideias.pt";
-const URL_ESPONTANEA = "https://portalei.espalhaideias.pt";
+const URL_OPORTUNIDADES = "https://portalei.espalhaideias.pt/";
+const URL_ESPONTANEA = "https://portalei.espalhaideias.pt/?candidatura=espontanea";
 
 export function Recrutamento() {
   return (
